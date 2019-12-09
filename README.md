@@ -1,108 +1,34 @@
 # Statistics
 
-## Distribution Summary
+## Random Variable
 
 ### Discrete Distribution
 
-1. **Poisson Distribution**
-
-   $X\sim Pois(\lambda), \lambda >0$
-
-   - Support: $x \in N^{+}$
-   - PMF: $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}, k=0, 1, ...$
-   - Mean: $E(X)=\lambda$
-   - Variance: $Var(X)=\lambda$
-   - MLE: $\hat{\lambda}= \bar{X}$
-   - Fisher Information(Single Sample): $I(\lambda)=\frac{1}{\lambda}$
-
-2. **Bernoulli Distribution**
-
-   $X\sim Ber(p), 0\le p\le1$
-
-   - Support: $x \in \{0,1\}$
-   - PMF: $P(X=k)=p^k(1-p)^{1-k}, k=0, 1$
-   - Mean: $E(X)=p$
-   - Variance: $Var(X)=p(1-p)$
-   - MLE: $\hat{p}=\bar{X}$
-   - Fisher Information(Single Sample): $I(p)=\frac{1}{p(1-p)}$
-
-3. **Binomial Distribution**
-
-   $X\sim B(n,p),n\in N, 0\le p\le1$
-
-   $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$
-
-   - Support: $X \in \{0,1,...,n\}$
-   - PMF: $P(X=k)={n\choose k}p^k(1-p)^{n-k}, 0\le k\le n$
-   - Mean: $E(X)=np$
-   - Variance: $Var(X)=np(1-p)$
-   - Fisher Information(Single Sample): $I(p)=\frac{n}{p(1-p)}$
-
-4. **Geometric Distribution**
-
-   $X\sim Geo(p),p \in (0,1)$
-
-   - Support: $X \in \{1,2,...\}$
-   - PMF: $P(X=k)=p(1-p)^{k-1}, k\ge 1$
-   - CDF:$P(X<=k)=1-(1-p)^k$
-   - Mean: $E(X)=\frac{1}{p}$
-   - Variance: $Var(X)=\frac{1-p}{p^2}$
-   - MLE: $\hat{p}=\frac{1}{\bar{X}}$
-   - Fisher Information(Single Sample): $I(p)=\frac{1}{p^2}+\frac{1}{p(1-p)}$
-
-5. 
+|               Distribution                |           **Poisson**: <br>$X\sim Pois(\lambda)$           |    Bernoulli:<br> $X\sim Ber(p)$    |          Binomial Distribution:<br>$X\sim B(n,p)$           | Geometric Distribution:<br>$X\sim Geo(p)$ |         Negative binomial:<br>$X\sim NB(k,p)$         |    Multinomial:<br>$X=(X_1,...,X_k)\sim M(n,p_1,...,p_k)$    |
+| :---------------------------------------: | :--------------------------------------------------------: | :---------------------------------: | :---------------------------------------------------------: | :---------------------------------------: | :---------------------------------------------------: | :----------------------------------------------------------: |
+|              **Parameters**               |                        $\lambda >0$                        |            $0\le p\le1$             |                     $n\in N,0\le p\le1$                     |               $p \in (0,1)$               |                   $k>0,p\in (0,1)$                    |                $n>0,\sum\limits_{i=1}^kp_i=1$                |
+|                **Support**                |                       $x \in N^{+}$                        |           $x \in \{0,1\}$           |                    $X \in \{0,1,...,n\}$                    |            $X \in \{1,2,...\}$            |                 $X\in \{k,k+1,...\}$                  | $X_i \in \{0,...,n\},i=1,...,k$<br>$\sum\limits_{i=1}^kX_i=n$ |
+|                  **PMF**                  | $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}$<br>$k=0, 1, ...$ | $P(X=k)=p^k(1-p)^{1-k}$<br>$k=0, 1$ |    $P(X=k)={n\choose k}p^k(1-p)^{n-k}$<br>$ 0\le k\le n$    |     $P(X=k)=p(1-p)^{k-1}$<br>$k\ge 1$     | $P(X=n)={n-1\choose k-1}p^{k}(1-p)^{n-k}$<br>$n\ge k$ | $P(X_1=n_1,...,X_k=n_k)=$<br>$\frac{n!}{\prod\limits_{i=1}^k n_i!}\prod\limits_{i=1}^{k}p_i^{n_i}$ |
+|                  **CDF**                  |                             -                              |                  -                  |                              -                              |            $P(X<=k)=1-(1-p)^k$            |                           -                           |                              -                               |
+|                 **Mean**                  |                       $E(X)=\lambda$                       |              $E(X)=p$               |                          $E(X)=np$                          |            $E(X)=\frac{1}{p}$             |                  $E(X)=\frac{k}{p}$                   |                        $E(X_i)=np_i$                         |
+|               **Variance**                |                      $Var(X)=\lambda$                      |           $Var(X)=p(1-p)$           |                      $Var(X)=np(1-p)$                       |         $Var(X)=\frac{1-p}{p^2}$          |              $Var(X)=\frac{k(1-p)}{p^2}$              |                    $Var(X_i)=np_i(1-p_i)$                    |
+|                  **MLE**                  |                  $\hat{\lambda}= \bar{X}$                  |          $\hat{p}=\bar{X}$          |                              -                              |        $\hat{p}=\frac{1}{\bar{X}}$        |              $\hat{p}=\frac{k}{\bar{X}}$              |                $\hat{p}=\frac{X_i}{\bar{n}}$                 |
+| **Fisher Information<br>(Single Sample)** |               $I(\lambda)=\frac{1}{\lambda}$               |       $I(p)=\frac{1}{p(1-p)}$       |                   $I(p)=\frac{n}{p(1-p)}$                   |         $I(p)=\frac{1}{p^2(1-p)}$         |               $I(p)=\frac{k}{p^2(1-p)}$               |                              -                               |
+|                **Others**                 |                                                            |                                     | $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$ |   Memoryless:<br>$P(X>m+n|X>n)=P(X>m)$    |                   $NB(1,p)=Geo(p)$                    |                                                              |
 
 ### Continues Distribution
 
-1. **Normal Distribution**
-
-   $X\sim N(\mu,\sigma^2), \mu\in R, \sigma^2>0$
-
-   - Support: $x \in R$
-
-   - PDF: $f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
-
-   - Mean: $E(X)=\mu$
-
-   - Variance: $Var(X)=\sigma^2$
-
-   - MLE
-
-     $logL(\mu,\sigma^2)=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln\sigma^2-\frac{1}{2\sigma^2}\sum\limits_{i=1}^{n}(x_i-\mu)^2$
-
-     - unknown $\mu,$known $\sigma^2$
-
-       $\hat{\mu}=\bar{X}$
-
-     - known $\mu,$unknown $\sigma^2$
-
-       $\hat{\sigma}^2=\frac{\sum\limits_{i=1}^{n}{(X_i-\mu)^2}}{n}$
-
-     - unknown $\mu,$unknown $\sigma^2$
-
-       $\hat{\mu}=\bar{X}, \hat{\sigma}^2=\frac{\sum\limits_{i=1}^{n}(X_i-\bar{X})^2}{n}$
-
-   - Fisher Information(Single Sample)
-
-     - unknown $\mu,$known $\sigma^2$
-
-       $I(\mu)=\frac{1}{\sigma^2}$
-
-     - known $\mu,$unknown $\sigma^2$
-
-       $I(\sigma^2)=\frac{1}{2\sigma^4}$
-
-2. **Exponential distribution**
-
-   $X\sim Exp(\lambda),\lambda>0$
-
-   - Support: $x\ge 0$
-   - PDF: $f(x)=\lambda e^{-\lambda x}$
-   - CDF:$F(x)=1-e^{-\lambda x}$
-   - Mean: $E(X)=\frac{1}{\lambda}$
-   - Variance: $Var(X)=\frac{1}{\lambda^2}$
-   - MLE: $\hat{\lambda}=\frac{1}{\bar{X}}$
-   - Fisher Information(Single Sample):$I(\lambda)=\frac{1}{\lambda^2}$
+|            Distribution            |                 Uniform: <br>$X\sim U(a,b)$                  |            Exponential:<br> $X\sim Exp(\lambda)$             |       Normal Distribution:<br>$X\sim N(\mu,\sigma^2)$        |           Gamma:<br>$X\sim \Gamma(\alpha，\beta)$            |             Beta:<br>$X\sim Beta(\alpha,\beta)$              |           Chi-squared:<br>$X\sim \mathcal{X}^2_n$            |                Student's *t*:<br>$X\sim t_n$                 |
+| :--------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|           **Parameters**           |                     $-\infty<a<b<\infty$                     |                         $\lambda>0$                          |                    $\mu\in R, \sigma^2>0$                    |                      $\alpha>0,\beta>0$                      |                      $\alpha>0,\beta>0$                      |                          $n\in N^+$                          |                            $n>0$                             |
+|            **Support**             |                        $x \in [a,b]$                         |                           $x\ge 0$                           |                          $x \in R$                           |                            $X>0$                             |                        $X \in [0,1]$                         |                      $x\in [0,\infty)$                       |                   $x\in (-\infty,\infty)$                    |
+|              **PDF**               | $f(x)=  \begin{cases}     \frac{1}{b-a}& x\in [a,b]\\     0              & otherwise \end{cases}$ |                $f(x)=\lambda e^{-\lambda x}$                 | $f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ | $f(x)=\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x}$ |  $f(x)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$  | $f(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^{\frac{n}{2}-1}e^{\frac{x}{2}}$ |                              -                               |
+|              **CDF**               | $f(x)=  \begin{cases} 0& x<a\\ \frac{x-a}{b-a}& x\in [a,b]\\ 1              & x>b \end{cases}$ |                   $F(x)=1-e^{-\lambda x}$                    |                              -                               |                              -                               |                              -                               |                              -                               |                              -                               |
+|              **Mean**              |                     $E(X)=\frac{a+b}{2}$                     |                   $E(X)=\frac{1}{\lambda}$                   |                          $E(X)=\mu$                          |                 $E(X)=\frac{\alpha}{\beta}$                  |              $E(X)=\frac{\alpha}{\alpha+\beta}$              |                           $E(X)=n$                           |                           $E(X)=0$                           |
+|            **Variance**            |                 $Var(X)=\frac{(b-a)^2}{12}$                  |                 $Var(X)=\frac{1}{\lambda^2}$                 |                      $Var(X)=\sigma^2$                       |               $Var(X)=\frac{\alpha}{\beta^2}$                | $Var(X)=\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$ |                         $Var(X)=2n$                          |                  $Var(X)=\frac{n}{n-2},n>2$                  |
+|              **MLE**               | $  \begin{cases}     \hat{b}=X_{(n)}& \text{known $a$},\text{unknown $b$}\\     \hat{a}=X_{(1)}              & \text{unknown $a$},\text{known $b$} \end{cases}$ |              $\hat{\lambda}=\frac{1}{\bar{X}}$               | $logL(\mu,\sigma^2)=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln\sigma^2-\frac{1}{2\sigma^2}\sum\limits_{i=1}^{n}(x_i-\mu)^2$<br>$  \begin{cases}     \hat{\mu}=\bar{X}& \text{unknown $\mu$},\text{known $\sigma^2$}\\     \hat{\sigma}^2=\frac{\sum\limits_{i=1}^{n}{(X_i-\mu)^2}}{n}& \text{known $\mu$},\text{unknown $\sigma^2$}\\ \hat{\mu}=\bar{X}, \hat{\sigma}^2=\frac{\sum\limits_{i=1}^{n}(X_i-\bar{X})^2}{n} & \text{unknown $\mu$},\text{unknown $\sigma^2$} \end{cases}$ |                              -                               |                              -                               |                              -                               |                              -                               |
+| **Fisher Info<br>(Single Sample)** |                              -                               |               $I(\lambda)=\frac{1}{\lambda^2}$               | $  \begin{cases}     I(\mu)=\frac{1}{\sigma^2}& \text{unknown $\mu$},\text{known $\sigma^2$}\\     I(\sigma^2)=\frac{1}{2\sigma^4}& \text{known $\mu$},\text{unknown $\sigma^2$}\end{cases}$ |                              -                               |                              -                               |                              -                               |                              -                               |
+|             **Others**             |                                                              | - Memoryless: <br>$P(X>s+t|X>t)=P(X>s)$<br>- Order Statistics:<br>$X_{(1)}\sim Exp(n\lambda)$<br>- Scaling:<br>$aX\sim Exp(\lambda/a),a>0$<br>- $Exp(\frac{1}{2})=\mathcal{X}^2_2$ | - $X\sim N(\mu,\sigma^2),aX+b\sim N(a\mu+b,a^2\sigma^2)$<br>- $X\sim N(\mu_1,\sigma_1^2),Y\sim N(\mu_2,\sigma_2^2),$<br>$aX+bY\sim N(a\mu_1+b\mu_2,a^2\sigma_1^2+b^2\sigma_2^2+2ab\sigma_1\sigma_2\rho)$ | - $X_i \overset{indep}{\sim}\Gamma(\alpha_i,\beta),$<br>$\sum X_i \sim \Gamma(\sum\alpha_i,\beta)$<br>- $\Gamma(1,\lambda)=Exp(\lambda)$<br>- $\Gamma(\frac{n}{2},\frac{1}{2})=\mathcal{X}^2_n$ |                                                              | - $Z_i\overset{i.i.d}{\sim}N(0,1),$<br>$V=\sum Z_i\sim \mathcal{X}^2_n$<br>- $\mathcal{X}^2_n=\Gamma(\frac{n}{2},\frac{1}{2})$ | $Z\sim N(0,1)$ independent with $V~\sim \mathcal{X}^2_n,$$T=\frac{Z}{\sqrt{\frac{V}{n}}}\sim t_n$ |
 
 
 
