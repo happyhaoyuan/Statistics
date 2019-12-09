@@ -4,17 +4,17 @@
 
 ### Discrete Distribution
 
-|               Distribution                |           **Poisson**: <br>$X\sim Pois(\lambda)$           |    Bernoulli:<br> $X\sim Ber(p)$    |          Binomial Distribution:<br>$X\sim B(n,p)$           | Geometric Distribution:<br>$X\sim Geo(p)$ |         Negative binomial:<br>$X\sim NB(k,p)$         |    Multinomial:<br>$X=(X_1,...,X_k)\sim M(n,p_1,...,p_k)$    |
-| :---------------------------------------: | :--------------------------------------------------------: | :---------------------------------: | :---------------------------------------------------------: | :---------------------------------------: | :---------------------------------------------------: | :----------------------------------------------------------: |
-|              **Parameters**               |                        $\lambda >0$                        |            $0\le p\le1$             |                     $n\in N,0\le p\le1$                     |               $p \in (0,1)$               |                   $k>0,p\in (0,1)$                    |                $n>0,\sum\limits_{i=1}^kp_i=1$                |
-|                **Support**                |                       $x \in N^{+}$                        |           $x \in \{0,1\}$           |                    $X \in \{0,1,...,n\}$                    |            $X \in \{1,2,...\}$            |                 $X\in \{k,k+1,...\}$                  | $X_i \in \{0,...,n\},i=1,...,k$<br>$\sum\limits_{i=1}^kX_i=n$ |
-|                  **PMF**                  | $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}$<br>$k=0, 1, ...$ | $P(X=k)=p^k(1-p)^{1-k}$<br>$k=0, 1$ |    $P(X=k)={n\choose k}p^k(1-p)^{n-k}$<br>$ 0\le k\le n$    |     $P(X=k)=p(1-p)^{k-1}$<br>$k\ge 1$     | $P(X=n)={n-1\choose k-1}p^{k}(1-p)^{n-k}$<br>$n\ge k$ | $P(X_1=n_1,...,X_k=n_k)=$<br>$\frac{n!}{\prod\limits_{i=1}^k n_i!}\prod\limits_{i=1}^{k}p_i^{n_i}$ |
-|                  **CDF**                  |                             -                              |                  -                  |                              -                              |            $P(X<=k)=1-(1-p)^k$            |                           -                           |                              -                               |
-|                 **Mean**                  |                       $E(X)=\lambda$                       |              $E(X)=p$               |                          $E(X)=np$                          |            $E(X)=\frac{1}{p}$             |                  $E(X)=\frac{k}{p}$                   |                        $E(X_i)=np_i$                         |
-|               **Variance**                |                      $Var(X)=\lambda$                      |           $Var(X)=p(1-p)$           |                      $Var(X)=np(1-p)$                       |         $Var(X)=\frac{1-p}{p^2}$          |              $Var(X)=\frac{k(1-p)}{p^2}$              |                    $Var(X_i)=np_i(1-p_i)$                    |
-|                  **MLE**                  |                  $\hat{\lambda}= \bar{X}$                  |          $\hat{p}=\bar{X}$          |                              -                              |        $\hat{p}=\frac{1}{\bar{X}}$        |              $\hat{p}=\frac{k}{\bar{X}}$              |                $\hat{p}=\frac{X_i}{\bar{n}}$                 |
-| **Fisher Information<br>(Single Sample)** |               $I(\lambda)=\frac{1}{\lambda}$               |       $I(p)=\frac{1}{p(1-p)}$       |                   $I(p)=\frac{n}{p(1-p)}$                   |         $I(p)=\frac{1}{p^2(1-p)}$         |               $I(p)=\frac{k}{p^2(1-p)}$               |                              -                               |
-|                **Others**                 |                                                            |                                     | $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$ |   Memoryless:<br>$P(X>m+n|X>n)=P(X>m)$    |                   $NB(1,p)=Geo(p)$                    |                                                              |
+|              Distribution              |           **Poisson**: <br>$X\sim Pois(\lambda)$           |    Bernoulli:<br> $X\sim Ber(p)$    |          Binomial Distribution:<br>$X\sim B(n,p)$           | Geometric Distribution:<br>$X\sim Geo(p)$ |         Negative binomial:<br>$X\sim NB(k,p)$         |    Multinomial:<br>$X=(X_1,...,X_k)\sim M(n,p_1,...,p_k)$    |
+| :------------------------------------: | :--------------------------------------------------------: | :---------------------------------: | :---------------------------------------------------------: | :---------------------------------------: | :---------------------------------------------------: | :----------------------------------------------------------: |
+|             **Parameters**             |                        $\lambda >0$                        |            $0\le p\le1$             |                     $n\in N,0\le p\le1$                     |               $p \in (0,1)$               |                   $k>0,p\in (0,1)$                    |                $n>0,\sum\limits_{i=1}^kp_i=1$                |
+|              **Support**               |                       $x \in N^{+}$                        |           $x \in \{0,1\}$           |                    $X \in \{0,1,...,n\}$                    |            $X \in \{1,2,...\}$            |                 $X\in \{k,k+1,...\}$                  | $X_i \in \{0,...,n\},i=1,...,k$<br>$\sum\limits_{i=1}^kX_i=n$ |
+|                **PMF**                 | $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}$<br>$k=0, 1, ...$ | $P(X=k)=p^k(1-p)^{1-k}$<br>$k=0, 1$ |    $P(X=k)={n\choose k}p^k(1-p)^{n-k}$<br>$ 0\le k\le n$    |     $P(X=k)=p(1-p)^{k-1}$<br>$k\ge 1$     | $P(X=n)={n-1\choose k-1}p^{k}(1-p)^{n-k}$<br>$n\ge k$ | $P(X_1=n_1,...,X_k=n_k)=$<br>$\frac{n!}{\prod\limits_{i=1}^k n_i!}\prod\limits_{i=1}^{k}p_i^{n_i}$ |
+|                **CDF**                 |                             -                              |                  -                  |                              -                              |            $P(X<=k)=1-(1-p)^k$            |                           -                           |                              -                               |
+|                **Mean**                |                       $E(X)=\lambda$                       |              $E(X)=p$               |                          $E(X)=np$                          |            $E(X)=\frac{1}{p}$             |                  $E(X)=\frac{k}{p}$                   |                        $E(X_i)=np_i$                         |
+|              **Variance**              |                      $Var(X)=\lambda$                      |           $Var(X)=p(1-p)$           |                      $Var(X)=np(1-p)$                       |         $Var(X)=\frac{1-p}{p^2}$          |              $Var(X)=\frac{k(1-p)}{p^2}$              |                    $Var(X_i)=np_i(1-p_i)$                    |
+|                **MLE**                 |                  $\hat{\lambda}= \bar{X}$                  |          $\hat{p}=\bar{X}$          |                              -                              |        $\hat{p}=\frac{1}{\bar{X}}$        |              $\hat{p}=\frac{k}{\bar{X}}$              |                $\hat{p}=\frac{X_i}{\bar{n}}$                 |
+| **Fisher Info**<br>(**Single Sample**) |               $I(\lambda)=\frac{1}{\lambda}$               |       $I(p)=\frac{1}{p(1-p)}$       |                   $I(p)=\frac{n}{p(1-p)}$                   |         $I(p)=\frac{1}{p^2(1-p)}$         |               $I(p)=\frac{k}{p^2(1-p)}$               |                              -                               |
+|               **Others**               |                                                            |                                     | $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$ |   Memoryless:<br>$P(X>m+n|X>n)=P(X>m)$    |                   $NB(1,p)=Geo(p)$                    |                                                              |
 
 ### Continues Distribution
 
@@ -34,19 +34,23 @@
 
 ## Hypothesis Testing
 
-1. Concepts
+### Concepts
 
-+ **Null Hypothesis**: $H_{0}$
-
-- **Alternative Hypothesis **: $H_{1}$
-
-- **Rejection Region**: $RR$
++ **Null Hypothesis**: $H_{0}$ vs **Alternative Hypothesis **: $H_{1}$
 
 - **Test Statistic**: $T$
 
-  + combine the random variables/function of the samples
-  + consider as an estimator, $T|H_0 \sim F$
-  + reject $H_0$ if $T \in RR$
+  + 是随机变量，原假设下分布 $T|H_0 \sim F$
+
+  + 给定$\alpha$，可根据原假设求$RR$
+
+    $RR=\begin{cases} \{|T|>F_{1-\frac{\alpha}{2}}\} & H_0:\theta=\theta_0 \\ {\{T>F_{1-\alpha}}\} & H_0:\theta\le\theta_0 \\ \{T<-F_{\alpha}\} & H_0:\theta\ge\theta_0\end{cases}$
+
+  + 是样本的函数$T(X)$
+
+  + reject $H_0$ if $T(X) \in RR$
+
+- **Rejection Region**: $RR$
 
 - **Type I Error** (**Significance Level**): $\alpha=P(T\in RR|H_0)$
 
@@ -56,62 +60,85 @@
 
   accepting $H_0$ when $H_0$ is false
 
-  for specific value of the alternative hypothesis: $\beta(\theta_1)=P(T\notin RR|\theta=\theta_1\in \Theta_1)$
+  for **specific value** of the alternative hypothesis: $\beta(\theta_1)=P(T\notin RR|\theta=\theta_1\in \Theta_1)$
 
 - **Statistical Power**: $1-\beta$
 
 - **p-value**: $P(T$ *is extreme than* $T_{obs}|H_0)$
 
-  for significant level $\alpha$
+  1. 找分布和统计量的样本观测值
 
-  - reject $H_0$ if  $p$-$value\le\alpha$
-  - accept $H_0$ if  $p$-$value>\alpha$
+      $T|\theta=\theta_0\sim F,T_{0}=T(X)$
 
-2. **Likelihood Ratio Tests(Simple Hypothesis)**
+  2. 求$p$-$value$
 
-   $H_0: \theta=\theta_0$ vs $H_1: \theta=\theta_1$
+     $p$-$value=\begin{cases} P(|T|>T_0|T\sim F) & H_0:\theta=\theta_0 \\ P(T>T_0|T\sim F) & H_0:\theta\le\theta_0 \\ P(T<T_0|T\sim F) & H_0:\theta\ge\theta_0 \end{cases}$
 
-   - Likelihood function: $L(\theta)=\prod\limits_{i=1}^{n}f(x_i|\theta)$
+  3. 给定 $\alpha$
 
-   - Likelihood ratio: $LR=\frac{L(\theta_0)}{L(\theta_1)}$
-   - reject $H_0$ when $LR<C,$ compute $C$ by solve $\alpha=P(LR<C|H_0)$
+     $\begin{cases} \text{reject $H_0$} & p\text{-}value\le\alpha \\ \text{accept $H_0$} & p\text{-}value>\alpha \end{cases}$
 
-3. **Generalized Likelihood Ratio Tests**
+### Likelihood Ratio Tests(Simple Hypothesis)
 
-   $H_0: \theta \in \Theta_0$ vs $H_1: \theta \in \Theta_1$
+$H_0: \theta=\theta_0$ vs $H_1: \theta=\theta_1$
 
-   $\Theta=\Theta_0\cup\Theta_1, d=dim(\Theta), d_0=dim(\Theta_0)$ 
+1. 写出 Likelihood function: $L(\theta)=\prod\limits_{i=1}^{n}f(x_i|\theta)$
 
-   Likelihood function: $L(\theta)=\prod\limits_{i=1}^{n}f(x_i|\theta)$
+2. 求 Likelihood ratio: $\Lambda(X)=\frac{L(\theta_0)}{L(\theta_1)}$
 
-   Likelihood ratio: $\Lambda=\frac{\underset{\theta\in\Theta_0}{Max}L(\theta)}{\underset{\theta\in\Theta}{Max}L(\theta)}$
+3. threshold $C$，得到拒绝域$RR=\{\Lambda(X)\le C\}$
 
-   - $\hat{\theta}=\underset{\theta}{argMax}$ is MLE of $\theta,$ depends on space $\Theta_0$ or $\Theta$
+   若$C$未知，给定$\alpha$，令$\alpha=P(\Lambda(X)\le C|X\sim F_{\theta_0})\overset{通过\Lambda反解出X}{=}P(X\le\Lambda^{-1}(C)|X\sim F_{\theta_0})$可求得C
 
-   - $-2log\Lambda\sim\mathcal{X}_{d-d_{0}}^2$
+4. 做决策
 
-   - for significant level $\alpha$
+   $\begin{cases} \text{reject $H_0$} & \Lambda\le C \\ \text{accept $H_0$} & \Lambda> C \end{cases}$
 
-     + $RR=\{-2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(1-\alpha)\}, F$ is CDF
+### Generalized Likelihood Ratio Tests
 
-     + reject $H_0$ if $-2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(1-\alpha)$
-     + reject $H_0$ if $p$-$value=1-F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(-2log\Lambda)\le\alpha$
+$H_0: \theta \in \Theta_0$ vs $H_1: \theta \in \Theta_1$
 
-4. **Normal Distribution**
+$\Theta=\Theta_0\cup\Theta_1, d=dim(\Theta), d_0=dim(\Theta_0)$ 
 
-   $X\sim N(\mu,\sigma^2)$
+1. 写出 Likelihood function: $L(\theta)=\prod\limits_{i=1}^{n}f(x_i|\theta)$
 
-   - $\mu$
-   - $\sigma^2$
+2. 求$\Theta_0$和$\Theta$下的MLE: 
 
-5. **Pearson's** $\mathcal{X}^2$ **Test**
+   $\hat{\theta_0}=\underset{\theta\in \Theta_0}{argMax}L(\theta)$
 
-   - statistics $\mathcal{X}^2=\sum\limits$
-   - Consistent Test
-   - Independent Test
-   - 
+   $\hat{\theta}=\underset{\theta\in \Theta}{argMax}L(\theta)$
 
-6. 
+3. 求 Likelihood ratio: $\Lambda=\frac{L(\hat{\theta_0})}{L(\hat\theta)}$
+
+4. 求分布：$-2log\Lambda\sim\mathcal{X}_{d-d_{0}}^2$
+
+5. 给定$\alpha$
+
+   拒绝域$RR=\{-2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha)\}$
+
+   $\begin{cases} \text{reject $H_0$} & -2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \\ \text{accept $H_0$} & -2log\Lambda\le F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \end{cases}$
+
+   或求$p$-$value=1-F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(-2log\Lambda)$
+
+   $\begin{cases} \text{reject $H_0$} & p\text{-}value\le\alpha \\ \text{accept $H_0$} & p\text{-}value>\alpha \end{cases}$
+
+### Pearson's $\mathcal{X}^2$ Test
+
+- statistics $\mathcal{X}^2=\sum\limits$
+- Consistent Test
+- Independent Test
+- 
+
+
+
+### Normal Distribution
+
+$X\sim N(\mu,\sigma^2)$
+
+- $\mu$
+- $\sigma^2$
+
+1. 
 
 
 
