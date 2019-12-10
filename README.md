@@ -8,13 +8,13 @@
 | :------------------------------------: | :--------------------------------------------------------: | :---------------------------------: | :---------------------------------------------------------: | :---------------------------------------: | :---------------------------------------------------: | :----------------------------------------------------------: |
 |             **Parameters**             |                        $\lambda >0$                        |            $0\le p\le1$             |                     $n\in N,0\le p\le1$                     |               $p \in (0,1)$               |                   $k>0,p\in (0,1)$                    |                $n>0,\sum\limits_{i=1}^kp_i=1$                |
 |              **Support**               |                       $x \in N^{+}$                        |           $x \in \{0,1\}$           |                    $X \in \{0,1,...,n\}$                    |            $X \in \{1,2,...\}$            |                 $X\in \{k,k+1,...\}$                  | $X_i \in \{0,...,n\},i=1,...,k$<br>$\sum\limits_{i=1}^kX_i=n$ |
-|                **PMF**                 | $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}$<br>$k=0, 1, ...$ | $P(X=k)=p^k(1-p)^{1-k}$<br>$k=0, 1$ |    $P(X=k)={n\choose k}p^k(1-p)^{n-k}$<br>$ 0\le k\le n$    |     $P(X=k)=p(1-p)^{k-1}$<br>$k\ge 1$     | $P(X=n)={n-1\choose k-1}p^{k}(1-p)^{n-k}$<br>$n\ge k$ | $P(X_1=n_1,...,X_k=n_k)=$<br>$\frac{n!}{\prod\limits_{i=1}^k n_i!}\prod\limits_{i=1}^{k}p_i^{n_i}$ |
+|                **PMF**                 | $P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}$<br>$k=0, 1, ...$ | $P(X=k)=p^k(1-p)^{1-k}$<br>$k=0, 1$ |    $P(X=k)={n\choose k}p^k(1-p)^{n-k}$<br>$ 0\le k\le n$    |     $P(X=k)=p(1-p)^{k-1}$<br>$k\ge 1$     | $P(X=n)={n-1\choose k-1}p^{k}(1-p)^{n-k}$<br>$n\ge k$ | $P(X_1=n_1,...,X_k=n_k)=$<br>${n\choose n_1,...,n_k}\prod\limits_{i=1}^{k}p_i^{n_i}$ |
 |                **CDF**                 |                             -                              |                  -                  |                              -                              |            $P(X<=k)=1-(1-p)^k$            |                           -                           |                              -                               |
 |                **Mean**                |                       $E(X)=\lambda$                       |              $E(X)=p$               |                          $E(X)=np$                          |            $E(X)=\frac{1}{p}$             |                  $E(X)=\frac{k}{p}$                   |                        $E(X_i)=np_i$                         |
 |              **Variance**              |                      $Var(X)=\lambda$                      |           $Var(X)=p(1-p)$           |                      $Var(X)=np(1-p)$                       |         $Var(X)=\frac{1-p}{p^2}$          |              $Var(X)=\frac{k(1-p)}{p^2}$              |                    $Var(X_i)=np_i(1-p_i)$                    |
 |                **MLE**                 |                  $\hat{\lambda}= \bar{X}$                  |          $\hat{p}=\bar{X}$          |                              -                              |        $\hat{p}=\frac{1}{\bar{X}}$        |              $\hat{p}=\frac{k}{\bar{X}}$              |                $\hat{p}=\frac{X_i}{\bar{n}}$                 |
 | **Fisher Info**<br>(**Single Sample**) |               $I(\lambda)=\frac{1}{\lambda}$               |       $I(p)=\frac{1}{p(1-p)}$       |                   $I(p)=\frac{n}{p(1-p)}$                   |         $I(p)=\frac{1}{p^2(1-p)}$         |               $I(p)=\frac{k}{p^2(1-p)}$               |                              -                               |
-|               **Others**               |                                                            |                                     | $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$ |   Memoryless:<br>$P(X>m+n|X>n)=P(X>m)$    |                   $NB(1,p)=Geo(p)$                    |                                                              |
+|               **Others**               |                                                            |                                     | $X=\sum\limits_{i=1}^n Y_i,Y_i \overset{i.i.d}{\sim}Ber(p)$ |   Memoryless:<br>$P(X>m+n|X>n)=P(X>m)$    |                   $NB(1,p)=Geo(p)$                    | ${n\choose n_1,...,n_k}=\frac{n!}{\prod\limits_{i=1}^k n_i!}$ |
 
 ### Continues Distribution
 
@@ -90,9 +90,8 @@ $H_0: \theta=\theta_0$ vs $H_1: \theta=\theta_1$
 
    若$C$未知，给定$\alpha$，令$\alpha=P(\Lambda(X)\le C|X\sim F_{\theta_0})\overset{通过\Lambda反解出X}{=}P(X\le\Lambda^{-1}(C)|X\sim F_{\theta_0})$可求得C
 
-4. 做决策
+4. 做决策，$\begin{cases} \text{reject $H_0$} & \Lambda\le C \\ \text{accept $H_0$} & \Lambda> C \end{cases}$
 
-   $\begin{cases} \text{reject $H_0$} & \Lambda\le C \\ \text{accept $H_0$} & \Lambda> C \end{cases}$
 
 ### Generalized Likelihood Ratio Tests
 
@@ -114,33 +113,78 @@ $\Theta=\Theta_0\cup\Theta_1, d=dim(\Theta), d_0=dim(\Theta_0)$
 
 5. 给定$\alpha$
 
-   拒绝域$RR=\{-2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha)\}$
+   - $RR=\{-2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha)\}, \begin{cases} \text{reject $H_0$} & -2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \\ \text{accept $H_0$} & -2log\Lambda\le F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \end{cases}$
 
-   $\begin{cases} \text{reject $H_0$} & -2log\Lambda>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \\ \text{accept $H_0$} & -2log\Lambda\le F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \end{cases}$
-
-   或求$p$-$value=1-F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(-2log\Lambda)$
-
-   $\begin{cases} \text{reject $H_0$} & p\text{-}value\le\alpha \\ \text{accept $H_0$} & p\text{-}value>\alpha \end{cases}$
+   - $p$-$value=1-F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(-2log\Lambda), \begin{cases} \text{reject $H_0$} & p\text{-}value\le\alpha \\ \text{accept $H_0$} & p\text{-}value>\alpha \end{cases}$
 
 ### Pearson's $\mathcal{X}^2$ Test
 
-- statistics $\mathcal{X}^2=\sum\limits$
-- Consistent Test
+Statistics $\mathcal{X}^2=\sum\limits_{i=1}^{r}\sum\limits_{j=1}^{c}\frac{(O_{ij}-E_{ij})^2}{E_{ij}}\sim \mathcal{X}^2_{d-d_0},E_{ij}=np_{ij},d=dim(\Theta),d_0=dim(\Theta_0)$
+
+$RR=\{\mathcal{X}^2>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha)\}, \begin{cases} \text{reject $H_0$} & \mathcal{X}^2>F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \\ \text{accept $H_0$} & \mathcal{X}^2\le F_{\mathcal{X}_{d-d_{0}}^2}(1-\alpha) \end{cases}$
+
+$p$-$value=1-F_{\mathcal{X}_{d-d_{0}}^2}^{-1}(\mathcal{X}^2), \begin{cases} \text{reject $H_0$} & p\text{-}value\le\alpha \\ \text{accept $H_0$} & p\text{-}value>\alpha \end{cases}$
+
+- $2\times 2$  Case
+
+  |       |        1        |        2        |        |
+  | :---: | :-------------: | :-------------: | :----: |
+  | **1** | $n_{11},p_{11}$ | $n_{12},p_{12}$ | $ R_1$ |
+  | **2** | $n_{21},p_{21}$ | $n_{22},p_{22}$ | $ R_2$ |
+  |       |     $ C_1$      |     $ C_2$      |  $n$   |
+
+  1. $p_{ij}, L(p)={n \choose n_{11},n_{12},n_{21},n_{22}}p_{11}^{n_{11}}p_{12}^{n_{12}}p_{21}^{n_{21}}p_{22}^{n_{22}}$
+  2. MLE: $\hat{p}\to \hat{p_{11}},\hat{p_{12}},\hat{p_{21}},\hat{p_{22}}$
+
 - Independent Test
-- 
 
+  $H_0:p_{ij}=p_{i}\cdot q_{j},$ rows and columns are independent
 
+  |         |     1      | ...  |    $j$    | ...  |    $c$     |  $\sum$   |
+  | :-----: | :--------: | :--: | :-------: | :--: | :--------: | :-------: |
+  |  **1**  |  $n_{11}$  | ...  | $n_{1j}$  | ...  |  $n_{11}$  | $R_1,p_1$ |
+  | **...** |    ...     |      |    ...    |      |    ...     |    ...    |
+  |   $i$   |  $n_{i1}$  | ...  | $n_{ij}$  | ...  |  $n_{ic}$  | $R_i,p_i$ |
+  | **...** |    ...     |      |    ...    |      |    ...     |    ...    |
+  |   $r$   | $$n_{r1}$$ | ...  | $n_{rj}$  | ...  | $$n_{rc}$$ | $R_r,p_r$ |
+  | $\sum$  | $C_1,q_1$  | ...  | $C_j,q_j$ | ...  | $C_c,q_c$  |    $n$    |
+
+  $\hat{p_i}=\frac{R_i}{n},\hat{q_j}=\frac{C_j}{n},E_{ij}=\frac{R_i\times C_j}{n},df=(r-1)(c-1)$
+
+- Consistent Test
+
+  $H_0:(p_{i1},...,p_{ic})=(p_1,...,p_c),i=1,...,r$ columns have consistent distribution cross rows
+
+  |         |     1      | ...  |    $j$    | ...  |    $c$     | $\sum$ |
+  | :-----: | :--------: | :--: | :-------: | :--: | :--------: | :----: |
+  |  **1**  |  $n_{11}$  | ...  | $n_{1j}$  | ...  |  $n_{11}$  | $R_1$  |
+  | **...** |    ...     |      |    ...    |      |    ...     |  ...   |
+  |   $i$   |  $n_{i1}$  | ...  | $n_{ij}$  | ...  |  $n_{ic}$  | $R_i$  |
+  | **...** |    ...     |      |    ...    |      |    ...     |  ...   |
+  |   $r$   | $$n_{r1}$$ | ...  | $n_{rj}$  | ...  | $$n_{rc}$$ | $R_r$  |
+  | $\sum$  | $C_1,p_1$  | ...  | $C_j,p_j$ | ...  | $C_c,p_c$  |  $n$   |
+
+  - known $(p_1,...,p_c)$
+
+    $E_{ij}=R_i\times p_j,df=r(c-1)$
+
+  - unknown $(p_1,...,p_c)$
+
+    $\hat{p_i}=\frac{C_i}{n},E_{ij}=\frac{R_i\times C_j}{n},df=(r-1)(c-1)$
 
 ### Normal Distribution
 
-$X\sim N(\mu,\sigma^2)$
+$X_i\sim N(\mu,\sigma^2)$
 
-- $\mu$
-- $\sigma^2$
-
-1. 
-
-
+|    unknown $\mu$ known $\sigma^2$    |     $H_0$     |     $H_1$      |                          Statistics                          |               RR                |                     $p$-$value$                     |
+| :----------------------------------: | :-----------: | :------------: | :----------------------------------------------------------: | :-----------------------------: | :-------------------------------------------------: |
+|                                      |  $\mu=\mu_0$  | $\mu\neq\mu_0$ | $T=\frac{\sqrt{n}(\bar{X}-\mu)}{\sigma}$<br>$T|_{\mu=\mu_0}\sim N(0,1)$ |   $|T|>Z_{\frac{\alpha}{2}}$    | $P(|T|>\frac{\sqrt{n}|\bar{X}-\mu_0|}{\sigma}|H_0)$ |
+|                                      | $\mu\le\mu_0$ |  $\mu>\mu_0$   |                                                              |         $T>Z_{\alpha}$          |  $P(T>\frac{\sqrt{n}(\bar{X}-\mu_0)}{\sigma}|H_0)$  |
+|                                      | $\mu\ge\mu_0$ |  $\mu<\mu_0$   |                                                              |         $T<-Z_{\alpha}$         |  $P(T<\frac{\sqrt{n}(\bar{X}-\mu_0)}{\sigma}|H_0)$  |
+| **unknown $\mu$ unknown $\sigma^2$** |   **$H_0$**   |   **$H_1$**    |                        **Statistics**                        |             **RR**              |                   **$p$-$value$**                   |
+|                                      |  $\mu=\mu_0$  | $\mu\neq\mu_0$ | $T=\frac{\sqrt{n}(\bar{X}-\mu)}{S}$<br>$T|_{\mu-\mu_0}\sim t_{n-1}$ | $|T|>t_{n-1}(\frac{\alpha}{2})$ |   $P(|T|>\frac{\sqrt{n}|\bar{X}-\mu_0|}{S}|H_0)$    |
+|                                      | $\mu\le\mu_0$ |  $\mu>\mu_0$   |                                                              |       $T>t_{n-1}(\alpha)$       | $P(T>\frac{\sqrt{n}(\bar{X}-\mu_0)}{\sigma}|H_0 )$  |
+|                                      | $\mu\ge\mu_0$ |  $\mu<\mu_0$   |                                                              |      $T<-t_{n-1}(\alpha)$       | $P(T<\frac{\sqrt{n}(\bar{X}-\mu_0)}{\sigma}|H_0 )$  |
 
 样本均值sample mean: $\bar{X}=\frac{\sum\limits_{i=1}^{n}X_i}{n}$
 
